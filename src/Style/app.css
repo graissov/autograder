@@ -1,0 +1,63 @@
+/* styles/app.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .app-container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0baedb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .app-content {
+    width: 70%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  .app-title {
+    text-align: center;
+  }
+  
+  .app-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .app-nav-link {
+    margin: 10px;
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .students-page,
+  .tasks-page {
+    margin-top: 20px;
+  }
+  
+  .students-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .students-table th,
+  .students-table td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .students-table th {
+    background-color: #0baedb;
+    color: #fff;
+  }
+  
