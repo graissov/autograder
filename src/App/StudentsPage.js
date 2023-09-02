@@ -16,7 +16,9 @@ const StudentsPage = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Score</th>
+            <th>Tasks Score</th>
+            <th>Bonus Score</th>
+            <th>Total Score</th>
           </tr>
         </thead>
         <tbody>
@@ -24,6 +26,8 @@ const StudentsPage = () => {
             <tr key={student.id}>
               <td>{student.name}</td>
               <td>{student.score}</td>
+              <td>{student.bonus_total}</td>
+              <td>{student.total_score}</td>
             </tr>
           ))}
         </tbody>

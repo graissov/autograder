@@ -13,7 +13,9 @@ const TaskDetailPage = () => {
     fetch('http://127.0.0.1:5000/tasks')
       .then((res) => res.json())
       .then((data) => {
-        const selectedTask = data.find((task) => task.id === parseInt(taskId));
+        console.log("taskId",taskId)
+        const selectedTask = data.find((task) => task.name === taskId);
+
         setTask(selectedTask);
       });
   }, [taskId]);
@@ -24,10 +26,29 @@ const TaskDetailPage = () => {
       .then((data) => setStudents(data));
   }, []);
 
+  // Function to extract the value associated with key 'a'
+    function extract_grade(name,list) {
+      for (const obj of list) {
+        if (name in obj) {
+          return obj[name];
+        }
+      }
+      return undefined; // Return undefined if 'a' key is not found
+    }
+
   useEffect(() => {
+    console.log("task",task);
+
     if (task && task.status === 'graded') {
+      
+      console.log("init",students)
       const gradesData = students.map((student) => {
-        const grade = student[task.name] === 0 ? 'fail' : 'pass';
+        console.log(String(task.name))
+
+        console.log("aa",student.tasks)
+        console.log("vot",student.tasks.map(obj => obj['task1']));
+        const grade = extract_grade(task.name,student.tasks) === 0 ? 'fail' : 'pass';
+        console.log(grade)
         return {
           name: student.name,
           grade: grade,
@@ -54,17 +75,22 @@ const TaskDetailPage = () => {
     students.forEach((student) => {
       const studentName = student.name;
       const passStatus = formData.get(studentName) === 'pass';
-      console.log(student);
+      console.log("student with id",student);
       console.log(task);
 
       const updatedStudent = {
         ...student,
-        [task.name]: passStatus ? 1 : 0,
-        score:
+        tasks: student.tasks.map(taskObj => {
+          if (task.name in taskObj) {
+            return { [task.name]: passStatus ? 1 : 0 };
+          }
+          return taskObj;
+        }),
+          score:
           (task.status === 'ungraded' || (task.status === 'graded' && !previousPassStatus[studentName])) && passStatus
-            ? student.score + 1
+            ? student.score + 1*task.weight
             : (task.status === 'graded' && previousPassStatus[studentName] && !passStatus)
-            ? student.score - 1
+            ? student.score - 1*task.weight
             : student.score,
       };
       
