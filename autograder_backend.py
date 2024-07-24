@@ -10,13 +10,13 @@ app = Flask(__name__)
 app.config["MONGO_URI"]="mongodb+srv://gani:NZCEmb9FckXF3IIX@cluster0.kjbmlx8.mongodb.net/"
 
 
-#Creating a connection cursor
+
 CORS(app)
 
 
 
 
-#change the code below to return students with id, name, score from the database freshmen_immigration
+
 @app.route('/students', methods=['GET', 'POST'])
 def get_students():
     # Connect to the database
@@ -77,8 +77,7 @@ def get_tasks():
 
 @app.route('/update_students', methods=['POST'])
 def update_students():
-    # Get the updated student data from the request's JSON payload
-    # Get the updated student data and the entire task object from the request's JSON payload
+
     request_data = request.json
     updated_students = request_data.get('students', [])
     task = request_data.get('task', {})
@@ -110,10 +109,10 @@ def update_students():
     query = ("UPDATE tasks SET status=%s WHERE id=%s")
     cursor.execute(query, (task_status, task_id))
 
-    # Commit the changes to the database
+
     cnx.commit()
 
-    # Close the database connection
+
     cursor.close()
     cnx.close()
 
