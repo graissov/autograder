@@ -6,7 +6,7 @@ const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/tasks') // Replace with the actual endpoint for tasks
+    fetch('http://127.0.0.1:5000/tasks') 
       .then((res) => res.json())
       .then((data) => setTasks(data));
   }, []);
